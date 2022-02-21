@@ -2,16 +2,11 @@ import dubins
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy
-import matplotlib.animation as animation 
-
-
 
 fig = matplotlib.rcParams['figure.figsize'] = 12, 9
 
-
-#fig = plt.figure()
 ax = plt.axes(xlim=(-150, 150), ylim=(-150, 150))
-line, = ax.plot([], [], lw=2) 
+
 
 qs = [
     (0.0, 0.0, 0.0),
@@ -54,16 +49,6 @@ def expand_plot(ax, scale = 1.1):
     expand_axis(ax, scale, 'xlim')
     expand_axis(ax, scale, 'ylim')
 
-
-# lists to store x and y axis points 
-xdata, ydata = [], []
-
-# initialization function 
-def init():
-	# creating an empty plot/frame 
-    line.set_data([], []) 
-    return line, 
-
 def plot_dubins_path(q0, q1, r=1.0, step_size=0.5):
     path = dubins.shortest_path(q0, q1, r)
     qs, _ = path.sample_many(step_size)
@@ -77,7 +62,7 @@ def plot_dubins_path(q0, q1, r=1.0, step_size=0.5):
     for i in range(qs.shape[0]):
         plt.plot([xs[i], us[i]], [ys[i], vs[i]],'r-')
     ax = plt.gca()
-    #expand_plot(ax)
+    expand_plot(ax)
     ax.set_aspect('equal')
 
 def plot_dubins_table(cols, rho=1.0):
@@ -88,7 +73,6 @@ def plot_dubins_table(cols, rho=1.0):
         plot_dubins_path(qs[a], qs[b], r = rho)
     plt.savefig('samples.png')
     plt.show()
-
 
 if __name__ == "__main__":
     plot_dubins_table(3, 1.0)

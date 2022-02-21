@@ -75,7 +75,7 @@ def plot_dubins_table(cols, rho=1.0):
     plt.show()
     
 
- if __name__ == "__main__":
+if __name__ == "__main__":
      plot_dubins_table(3, 1.0)
 
 
